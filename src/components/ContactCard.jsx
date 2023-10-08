@@ -1,6 +1,6 @@
 import { HiOutlineUserCircle } from "react-icons/hi";
-import {RiEditCircleLine} from "react-icons/ri"
-import {IoMdTrash} from "react-icons/io"
+import { RiEditCircleLine } from "react-icons/ri";
+import { IoMdTrash } from "react-icons/io";
 import { useState } from "react";
 import AddAndUpdate from "./AddAndUpdate";
 import { deleteDoc, doc } from "firebase/firestore";
@@ -8,23 +8,23 @@ import { db } from "../config/firebase";
 import { ToastContainer, toast } from "react-toastify";
 
 const ContactCard = ({ item }) => {
-  const [isOpen,setIsOpen]=useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const onOpen=()=>{
-    setIsOpen(true)
-  }
-  const onClose=()=>{
-    setIsOpen(false)
-  }
+  const onOpen = () => {
+    setIsOpen(true);
+  };
+  const onClose = () => {
+    setIsOpen(false);
+  };
 
-  const deleteContact = async(id)=>{
+  const deleteContact = async (id) => {
     try {
-      await deleteDoc(doc(db,"contacts",id))
-      toast.success(`${item.name} deleted Successfully`)
+      await deleteDoc(doc(db, "contacts", id));
+      toast.success(`${item.name} deleted Successfully`);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -40,11 +40,14 @@ const ContactCard = ({ item }) => {
           </div>
         </div>
         <div className="flex text-3xl">
-          <RiEditCircleLine onClick={onOpen} className="cursor-pointer"/>
-          <IoMdTrash onClick={()=>deleteContact(item.id)} className="cursor-pointer text-orange"/>
+          <RiEditCircleLine onClick={onOpen} className="cursor-pointer" />
+          <IoMdTrash
+            onClick={() => deleteContact(item.id)}
+            className="cursor-pointer text-orange"
+          />
         </div>
       </div>
-      <AddAndUpdate isOpen={isOpen} onClose={onClose} item={item} isUpdate/>
+      <AddAndUpdate isOpen={isOpen} onClose={onClose} item={item} isUpdate />
       <ToastContainer position="top-center" />
     </>
   );
